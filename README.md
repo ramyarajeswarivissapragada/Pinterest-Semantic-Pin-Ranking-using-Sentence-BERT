@@ -47,18 +47,14 @@ Pinterest is a visual discovery engine — but search still depends on matching 
 
 ## 🧪 Evaluation
 
-We manually annotated 20 diverse queries to evaluate real-world performance.
+We manually annotated 20 search queries to assess real-world performance. The model achieved strong precision on stylistic and decor-related queries, with a few expected failures due to keyword ambiguity.
 
-| Query | Top Result | Relevant? | Notes |
-|-------|------------|-----------|-------|
-| "cat furniture" | Cozy Shoppe Buddy Bed | ✅ | On-theme but not exact |
-| "wedding table decor" | Boho table centerpiece | ✅ | High visual & contextual relevance |
-| "pantry hacks" | IKEA hack kitchen | ✅ | Matches intent |
-| "cat furniture" | Doja Cat Met Gala | ❌ | False positive (keyword trap) |
-| "modern workspace" | IKEA desk setup | ✅ | Strong match |
+- **Precision@1:** 80%  
+- **Precision@3:** ~85–90%  
+- **Common failures:** Keyword traps (e.g. "Doja Cat" for "cat furniture")  
+- **Repin count insight:** Relevant results tend to have higher engagement
 
-> **Precision@3 across 20 queries**: ~85%  
-> **Top-5 results had ~3× higher repin count than random pins**, suggesting relevance aligns with engagement.
+📄 See [evaluation.md](./evaluation.md) for full query results and analysis
 
 ---
 
