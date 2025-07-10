@@ -2,10 +2,6 @@
 
 This project is an end-to-end semantic ranking system that simulates Pinterest's content discovery experience using NLP. Given a user query like `"kitchen storage hacks"` or `"boho wedding decor"`, the app returns top influencer pins ranked by **semantic similarity** — not just keyword overlap.
 
-<p align="center">
-  <img src="screenshot.png" width="700"/>
-</p>
-
 ---
 
 ## 🧠 Problem Statement
@@ -70,6 +66,14 @@ The app is powered by Streamlit with:
   <img src="app_ui.png" width="700"/>
 </p>
 
+<p align="center">
+  <img src="app_control.png" width="700"/>
+</p>
+
+
+<p align="center">
+  <img src="reranker.png" width="700"/>
+</p>
 To run locally:
 
 ```bash
