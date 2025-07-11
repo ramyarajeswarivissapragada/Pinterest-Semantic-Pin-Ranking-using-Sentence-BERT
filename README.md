@@ -1,80 +1,82 @@
-# 🔍 Pinterest Semantic Pin Ranking using Sentence-BERT
+# 📌 Pinterest Semantic Ranking App
 
-This project is an end-to-end semantic ranking system that simulates Pinterest's content discovery experience using NLP. Given a user query like `"kitchen storage hacks"` or `"boho wedding decor"`, the app returns top influencer pins ranked by **semantic similarity** — not just keyword overlap.
+This project simulates Pinterest’s content discovery experience using a semantic ranking system powered by Sentence-BERT and CrossEncoder models. Given a query like `"boho wedding decor"` or `"cat furniture"`, the system returns top influencer pins ranked by meaning—not just keyword overlap.
 
----
+## 🔍 Project Overview
 
-## 🧠 Problem Statement
+Millions of users rely on Pinterest to discover ideas. This project builds an intelligent search system that mimics how Pinterest might semantically rank influencer content based on:
+- User query relevance
+- Content popularity (repins)
+- Meaning—not just text matching
 
-Pinterest is a visual discovery engine — but search still depends on matching user intent with content across a massive catalog of pins. We aim to replicate **Pinterest-style semantic search** using real influencer pins and a modern NLP embedding pipeline.
-
----
-
-## 📦 Dataset
-
-**Top Pinterest Influencers – A Snapshot of Popularity and Engagement**  
-- 5,000 pins from top-followed Pinterest accounts  
-- Columns: `id`, `title`, `description`, `repin_count`  
-- Cleaned to ~2,400 usable examples with rich English text
+The final app is built with **Streamlit** and supports real-time interactive search.
 
 ---
 
-## 🛠️ Tech Stack
+## ⚙️ Features
 
-| Component | Tools Used |
-|----------|------------|
-| Embeddings | `Sentence-BERT (all-MiniLM-L6-v2)` |
-| Similarity | Cosine similarity using `sklearn` |
-| Preprocessing | Emoji filtering, short-text drop, non-English filtering |
-| UI | Streamlit |
-| Evaluation | Manual annotation + engagement alignment (repin count) |
-
----
-
-## ⚙️ How It Works
-
-1. Pins are embedded using **Sentence-BERT**
-2. User enters a free-text search query
-3. We compute cosine similarity with all pin embeddings
-4. Top-K results are returned based on similarity and minimum threshold
-5. (Optional) Repin count can be used for secondary ranking or insights
+| Component                | Description                                                                 |
+|--------------------------|-----------------------------------------------------------------------------|
+| 🧹 Text Preprocessing     | Cleans and combines title + description, filters short/emoji/non-English rows |
+| 🤖 Sentence-BERT Encoder | Generates vector embeddings for all pins using `all-MiniLM-L6-v2`           |
+| 🔁 CrossEncoder Reranker | Re-ranks top pins using `cross-encoder/ms-marco-MiniLM-L-6-v2`              |
+| ⚖️ Alpha Blending        | Balances relevance vs. popularity using repin count log-scaling             |
+| 🎛 Interactive App       | Query input, top-K slider, similarity threshold, and reranker toggle        |
+| 📊 Evaluation            | Manual annotation of 20 real-world queries with precision@3 and insights   |
 
 ---
 
-## 🧪 Evaluation
+## 🖥️ Streamlit App Demo
 
-We manually annotated 20 search queries to assess real-world performance. The model achieved strong precision on stylistic and decor-related queries, with a few expected failures due to keyword ambiguity.
+### Inputs:
+- 🔎 Query input (e.g., `"fall home decor"`)
+- 🎯 Minimum similarity threshold
+- 🎚 Top-K results to show
+- ⚖️ Alpha slider: blend semantic vs. repin score
+- ✅ Toggle: use CrossEncoder for reranking
 
-- **Precision@1:** 80%  
-- **Precision@3:** ~85–90%  
-- **Common failures:** Keyword traps (e.g. "Doja Cat" for "cat furniture")  
-- **Repin count insight:** Relevant results tend to have higher engagement
-
-📄 See [evaluation.md](./evaluation.md) for full query results and analysis
+### Outputs:
+- Table with:
+  - Pin text
+  - Repin count
+  - Relevance score (BiEncoder / CrossEncoder)
+  - Final score (blended)
 
 ---
 
-## 🚀 Demo App
+## 📁 Project Files
 
-The app is powered by Streamlit with:
-- Query input box
-- Top-K slider
-- Similarity threshold control
-- Output table with pin text, repin count, and similarity score
+| File                  | Purpose                                      |
+|-----------------------|----------------------------------------------|
+| `app.py`              | Streamlit frontend with full functionality   |
+| `notebook.ipynb`      | Jupyter notebook for preprocessing and testing |
+| `cleaned_pins.csv`    | Final dataset after cleaning                 |
+| `embeddings.npy`      | Sentence-BERT embeddings                     |
+| `evaluation.md`       | Manual evaluation for 20 real-world queries  |
 
-<p align="center">
-  <img src="app_ui.png" width="700"/>
-</p>
+---
 
-<p align="center">
-  <img src="app_control.png" width="700"/>
-</p>
+## 📊 Evaluation
 
+We manually annotated 20 diverse queries to evaluate real-world performance.
 
-<p align="center">
-  <img src="reranker.png" width="700"/>
-</p>
-To run locally:
+| Query                  | Top Result                       | Relevant? | Notes                                 |
+|------------------------|----------------------------------|-----------|----------------------------------------|
+| `cat furniture`        | Cozy Buddy Bed                   | ✅        | On-theme but not exact                 |
+| `cat furniture`        | Doja Cat Met Gala                | ❌        | False positive (keyword trap)         |
+| `wedding table decor`  | Boho centerpiece                 | ✅        | Strong contextual relevance           |
+| `pantry hacks`         | IKEA kitchen storage             | ✅        | Highly relevant and practical         |
+| `shelf styling`        | Urban Outfitters bookshelf pin   | ✅        | Visual and semantic match             |
 
+> **Precision@3 across 20 queries**: ~85%  
+> **Top-5 results had ~3× higher repin count than random pins**, suggesting relevance aligns with engagement.
+
+See full breakdown in [`evaluation.md`](evaluation.md).
+
+---
+
+## 🚀 Run Locally
+
+### 📦 Install Dependencies
 ```bash
-streamlit run app.py
+pip install -r requirements.txt
