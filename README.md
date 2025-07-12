@@ -1,5 +1,4 @@
-````markdown
-# 🧠 Pinterest Semantic Pin Ranking (with BERT + CrossEncoder)
+# 📌 Pinterest Semantic Pin Ranking (with BERT + CrossEncoder)
 
 This project is an end-to-end semantic ranking system that simulates Pinterest's content discovery experience using modern NLP. Given a user query like `"kitchen storage hacks"` or `"boho wedding decor"`, the app returns **top influencer pins ranked by semantic similarity** — not just keyword overlap.
 
@@ -101,36 +100,7 @@ We manually tested 20 diverse queries using:
 
 ---
 
-## 🖼️ Screenshots
 
-> To show UI in your GitHub README:
-
-1. Save screenshots in your repo (e.g., `/images/app.png`)
-2. Embed using relative paths:
-
-```markdown
-![Search UI](images/app.png)
-```
-
-Recommended screenshots:
-
-* Full Streamlit UI with query + results
-* Query with reranking toggle enabled (showing clean matches)
-* Example of Doja Cat being filtered out
-
----
-
-## 📁 Project Structure
-
-```
-.
-├── cleaned_pins.csv           # Cleaned Pinterest data
-├── embeddings.npy             # Precomputed SBERT embeddings
-├── evaluation.md              # Full manual evaluation results
-├── app.py                     # Streamlit application
-├── pinterest_ranking.ipynb    # Jupyter Notebook (EDA + modeling)
-├── README.md                  # This file
-```
 
 ---
 
