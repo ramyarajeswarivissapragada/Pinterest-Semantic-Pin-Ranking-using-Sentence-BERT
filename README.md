@@ -124,6 +124,7 @@ We manually tested 20 diverse queries using:
 
 **Ramya Rajeswari Vissapragada**
 MS Business Analytics & AI, The University of Texas at Dallas
+
 💻 Passionate about NLP, ML, and Responsible AI
 
 ---
