@@ -100,7 +100,23 @@ We manually tested 20 diverse queries using:
 
 ---
 
+## 📸 Screenshots
 
+### Main Interface
+![App UI](app-ui.png)
+*Clean Streamlit interface with semantic search capabilities*
+
+### Search Results
+![Search Results](search-results.png)
+*Example results showing ranked pins with similarity scores and repin counts*
+
+### Interactive Controls
+![App Controls](app-controls.png)
+*Tunable parameters: Top-K, similarity threshold, alpha blending, and CrossEncoder toggle*
+
+### CrossEncoder Reranking
+![Reranker](reranker.png)
+*Comparison showing improved ranking quality with CrossEncoder reranking enabled*
 
 ---
 
